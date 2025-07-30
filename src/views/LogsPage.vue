@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import VirtualScroller from '@/components/common/VirtualScroller.vue'
-import LogsCard from '@/components/logs/LogsCard.vue'
+import LogsCard from '@/components/logs/LogsCard.tsx'
 import { isMiddleScreen } from '@/helper/utils'
 import { logFilter, logTypeFilter, logs } from '@/store/logs'
 import type { LogWithSeq } from '@/types'
