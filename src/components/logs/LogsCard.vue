@@ -1,13 +1,15 @@
 <template>
-  <div class="card hover:bg-base-200 mb-1 block p-2 text-sm break-all">
-    <span class="inline-block min-w-5 text-center">{{ log.seq }}</span>
-    <span class="text-main mx-2">
-      {{ log.time }}
-    </span>
-    <span :class="textColorMapForType[log.type as keyof typeof textColorMapForType]">
-      {{ log.type }}
-    </span>
-    <span class="ml-2">{{ log.payload }}</span>
+  <div class="card hover:bg-base-200 mb-1 gap-2 p-2 text-sm">
+    <div class="flex gap-2">
+      <span class="badge badge-sm bg-base-200/50 text-base-content/80">{{ log.seq }}</span>
+      <span class="text-main">
+        {{ log.time }}
+      </span>
+      <span :class="textColorMapForType[log.type as keyof typeof textColorMapForType]">
+        {{ log.type }}
+      </span>
+    </div>
+    <div class="break-all">{{ log.payload }}</div>
   </div>
 </template>
 
