@@ -94,8 +94,9 @@
       </template>
 
       <div
-        class="grid max-w-3xl grid-cols-2 gap-2 md:grid-cols-3 xl:max-w-6xl xl:grid-cols-6"
-        v-if="version"
+        v-if="!isSingBox || displayAllFeatures"
+        class="grid max-w-6xl grid-cols-2 gap-2"
+        :class="hasSmartGroup ? 'md:grid-cols-4 xl:grid-cols-7' : 'md:grid-cols-3 xl:grid-cols-6'"
       >
         <template v-if="!isSingBox || displayAllFeatures">
           <button
@@ -106,21 +107,33 @@
             {{ $t('upgradeCore') }}
           </button>
           <button
-            :class="twMerge('btn btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
+            class="btn btn-sm"
             @click="handlerClickRestartCore"
           >
+            <span
+              v-if="isCoreRestarting"
+              class="loading loading-spinner loading-md"
+            ></span>
             {{ $t('restartCore') }}
           </button>
           <button
-            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
+            class="btn btn-sm"
             @click="handlerClickReloadConfigs"
           >
+            <span
+              v-if="isConfigReloading"
+              class="loading loading-spinner loading-md"
+            ></span>
             {{ $t('reloadConfigs') }}
           </button>
           <button
-            :class="twMerge('btn btn-sm', isGeoUpdating ? 'animate-pulse' : '')"
+            class="btn btn-sm"
             @click="handlerClickUpdateGeo"
           >
+            <span
+              v-if="isGeoUpdating"
+              class="loading loading-spinner loading-md"
+            ></span>
             {{ $t('updateGeoDatabase') }}
           </button>
           <button
@@ -161,7 +174,6 @@ import {
   reloadConfigsAPI,
   restartCoreAPI,
   updateGeoDataAPI,
-  version,
 } from '@/api'
 import BackendVersion from '@/components/common/BackendVersion.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
@@ -172,7 +184,6 @@ import { fetchRules } from '@/store/rules'
 import { autoUpgradeCore, checkUpgradeCore, displayAllFeatures } from '@/store/settings'
 import { activeBackend } from '@/store/setup'
 import type { Config } from '@/types'
-import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 import UpgradeCoreModal from './UpgradeCoreModal.vue'
 
